@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
 """
-Created on Mon Oct  1 11:16:50 2018
+Created on Fri Nov  2 09:39:44 2018
 
 @author: Gehaha
 """
+
 import sys
-from SlamCar import Ui_MainWindow
+from Ui import Ui_MainWindow
 import binascii
 import threading
 import stopThreading
@@ -155,7 +156,7 @@ class SignalLogic(QtWidgets.QMainWindow,Ui_MainWindow):
     def tcp_server_start(self):
         
         self.tcp_socket = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
-        #取消主动断开连接四次握手后的TIME_WAIT状态
+        #取消主动断开连接四次握手后的TIME_WAIT状
         self.tcp_socket.setsockopt(socket.SOL_SOCKET,socket.SO_REUSERADDR,1)
         #设定套接字为非阻塞式
         self.tcp_socket.setblocking(False)
@@ -326,5 +327,3 @@ if __name__ == '__main__':
     ui = SignalLogic()  
     ui.show() 
     sys.exit(app.exec_())  #退出中使用的消息循环，结束消息循环时就退出程序
-
-
