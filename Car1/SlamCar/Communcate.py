@@ -28,7 +28,7 @@ class Communcate(QtWidgets.QMainWindow,Ui_MainWindow):
             self.__ser = serial.Serial()
         else:
             pass
-        
+    
         self.__ser = serial.Serial()
         self.setupUi(self)
 
@@ -44,10 +44,10 @@ class Communcate(QtWidgets.QMainWindow,Ui_MainWindow):
         self.__ser.parity =  serial.PARITY_NONE
         self.__ser.open()
         if(self.__ser.isOpen()):
-            self.Show_label.setText("open serial success")
+            print("open serial success")           
             return True
         else:
-          self.Show_label.setText("open serial faild !!!")
+          print("open serial faild !!!")
           return False  
 
     def close(self):
@@ -62,12 +62,13 @@ class Communcate(QtWidgets.QMainWindow,Ui_MainWindow):
         msg.setData(data)
         return msg
 
-    def send(self, msg):
-        self.__write(msg.data()) 
-
+    def send(self, msg):          
+        self.__write(msg.data())
+       # self.__write(msg.data()) 
+        
     def __read(self):
         res_data = ()
-        while(self.__ser.isOpen()):
+        while(self.__ser.is_open()):
             size = self.__ser.inWaiting()
             if size:
                 # print(size) 
@@ -77,7 +78,7 @@ class Communcate(QtWidgets.QMainWindow,Ui_MainWindow):
                 return res_data
                 self.__ser.flushInput()
 
-    def __write(self, data):
+    def __write(self,data):
         self.__ser.write(data)
  
 # def receive():
