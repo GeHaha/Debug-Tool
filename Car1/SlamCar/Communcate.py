@@ -79,8 +79,8 @@ class Communcate(QtWidgets.QMainWindow,Ui_MainWindow):
                 self.__ser.flushInput()
 
     def __write(self,data):
-        self.__ser.write(data)
- 
+        self.__ser.write(data)      
+       
 # def receive():
     #  while True:
         # msg = McuCommuncate.receive()

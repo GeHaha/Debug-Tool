@@ -3,8 +3,11 @@ import serial
 import serial.tools.list_ports
 from PyQt5 import QtCore,QtGui,QtWidgets
 import sys
-from  Communcate import Communcate
 import binascii
+
+from Communcate import Communcate
+from DataBase import DataBase
+
 class signal_ui(QtWidgets.QMainWindow,Ui_MainWindow):
     
     def __init__(self):
@@ -17,7 +20,12 @@ class signal_ui(QtWidgets.QMainWindow,Ui_MainWindow):
         #信号设置
         self.Open_Button.clicked.connect(self.port_connect)
         self.Close_Button.clicked.connect(self.port_close)
-        self.Start_Button.clicked.connect(self.port_send)
+        
+        self.speedEdit.updated.connect(self.__updateSpeed)
+        self.angleEdit.updated.connect(self.__updateAngle)
+        
+        self.forwardButton.pressed.connect(self.__forward)
+        self.forwardButton.realeased.connect(self.__reset)
         
     def port_connect(self):
         self.Show_label.setText("open serial success!")
@@ -26,28 +34,49 @@ class signal_ui(QtWidgets.QMainWindow,Ui_MainWindow):
     def port_close(self):
         self.Show_label.setText("close serial success!")
         return self.link.close()  
-
-
-    def port_send(self,msg):
-        self.__write(self)      
+    
+    def run():
+       # self.__workLoop()
+        pass
+    
+    def stop():
+        pass
+    
+    
+    def sendData(self,msg):       
         if (self.__ser.isOpen()):
             return self.link.send(msg)     
         else:
-            self.__ser.open()
+            self.port_connect()
             return self.link.send(msg)
             self.Show_label.setText("send failed !")
-   
-    def __write(self,data):
-        if (self.__ser.is_open()):           
-            self.__ser.write(self.Speed_lineEdit.text().encode('utf-8'))
-            self.__ser.write(self.Angle_lineEdit.text().encode('utf-8')) 
-            self.__ser.write(self.Hight_lineEdit.text().encode('utf-8'))
-        else:
-            self.__ser.open()
-            self.__ser.write(self.Speed_lineEdit.text().encode('utf-8'))
-            self.__ser.write(self.Angle_lineEdit.text().encode('utf-8')) 
-            self.__ser.write(self.Hight_lineEdit.text().encode('utf-8'))
-    def port_read(self): 
+
+    
+    
+    def __reset(self):
+        db = DataBase()
+        db.cmdMsg = [0,0]
+        
+    def __workLoop():
+        
+    
+    def __updateReceive():
+        pass
+    
+    def __updateSpeed():    
+        db = DataBase()
+        
+        db.feedbackMsg = [0,0]
+
+    def __updateAngle():
+        db = DataBase()
+        
+        db.feedbackMsg = [0,0]
+    
+    def __refreshLable(): 
+        db = DataBase()
+        
+        
         pass
     
 if __name__ == '__main__':
