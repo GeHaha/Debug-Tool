@@ -46,13 +46,12 @@ class DataPack():
         
         # return Head + self.__msg[1] + self.__msg[2]
 
-
     def body(self):
         return self.__msg[1]
     
     def crc(self):
         return self.__msg[2]
-
+    
     def size(self):
         # print(len(self.__msg[0]))
         # print(len(self.__msg[1]))

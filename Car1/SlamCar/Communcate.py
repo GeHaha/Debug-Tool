@@ -35,7 +35,7 @@ class Communcate(QtWidgets.QMainWindow,Ui_MainWindow):
     def  __del__(self):
         self.__ser.close()
    
- 
+    
     def connect(self):
         self.__ser.baudrate = 115200
         self.__ser.port = "COM1"
@@ -52,8 +52,7 @@ class Communcate(QtWidgets.QMainWindow,Ui_MainWindow):
 
     def close(self):
         self.__ser.close()
-          
-            
+                     
     # omit a single 
     def receive(self):
         data = self.__read()
